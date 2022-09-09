@@ -1,5 +1,8 @@
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
+import firebase from 'firebase/compat/app';
+
+import { FirebaseAuth } from 'react-firebaseui';
 
 import { useAuthentication } from "@context/AuthContext";
 
@@ -7,42 +10,44 @@ import { loginCallback } from "@api/login";
 
 import logo from "@assets/logo.png";
 
+const uiConfig = {
+  // Popup signin flow rather than redirect flow.
+  signInFlow: 'popup',
+  // Redirect to /signedIn after sign in is successful. Alternatively you can provide a callbacks.signInSuccess function.
+  signInSuccessUrl: '/',
+  // We will display Google and email as auth providers.
+  signInOptions: [
+    firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+    firebase.auth.EmailAuthProvider.PROVIDER_ID,
+  ],
+};
+
+
 export default function Home() {
   const { user, setUser, setIdToken } = useAuthentication();
 
   useEffect(() => {
-    async function onSignIn(res: { credential: string }) {
-      try {
-        const data = await loginCallback(res.credential)
+    const unregisterAuthObserver = firebase.auth().onAuthStateChanged(async user => {
+      if (!user) {
+        setIdToken(undefined);
+        setUser(undefined);
+      } else {
+        const idToken = await user.getIdToken(true);
 
-        localStorage.setItem("trivia-access-token", res.credential);
+        try {
+          console.log('hi')
+          const data = await loginCallback(idToken);
 
-        setUser(data);
-        setIdToken(res.credential);
-      } catch (e) {
-        console.log("failed");
+          setUser(data)
+          setIdToken(idToken);
+        } catch (e) {
+          console.log('failed')
+        }
+        
       }
-    }
-
-    //@ts-ignore
-    google.accounts.id.initialize({
-      client_id: process.env.REACT_APP_GOOGLE_CLIENT_ID as string,
-      callback: onSignIn,
-      auto_select: true,
-      context: "signin",
     });
-    //@ts-ignore
-    google.accounts.id.renderButton(
-      document.getElementById("sign-in") as HTMLElement,
-      { theme: "outline", size: "large" }
-    );
-
-    const accessToken = localStorage.getItem("triv-access-token");
-
-    if (accessToken) {
-      onSignIn({ credential: accessToken });
-    }
-  }, [setUser, setIdToken]);
+    return () => unregisterAuthObserver(); // Make sure we un-register Firebase observers when the component unmounts.
+  }, []);
 
   function handleLogout() {
     setUser(undefined);
@@ -55,6 +60,10 @@ export default function Home() {
   return (
     <>
       <div id="sign-in" className={user ? "hidden" : undefined}></div>
+      <FirebaseAuth 
+        firebaseAuth={firebase.auth()}
+        uiConfig={uiConfig}
+      />
       {user && (
         <div>
           <img src={logo} alt="logo" width={75} height={75} />
