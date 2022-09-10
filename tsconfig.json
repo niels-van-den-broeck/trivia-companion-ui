@@ -1,7 +1,11 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -17,12 +21,27 @@
     "jsx": "react-jsx",
     "baseUrl": "./src",
     "paths": {
-      "@modules/*": ["modules/*"],
-      "@api/*": ["api/*"],
-      "@context/*": ["context/*"],
-      "@assets/*": ["assets/*"],
-      "@utils/*": ["utils/*"]
+      "@modules/*": [
+        "modules/*"
+      ],
+      "@api/*": [
+        "api/*"
+      ],
+      "@context/*": [
+        "context/*"
+      ],
+      "@assets/*": [
+        "assets/*"
+      ],
+      "@utils/*": [
+        "utils/*"
+      ],
+      "@components/*": [
+        "components/*"
+      ]
     }
   },
-  "include": ["src"]
+  "include": [
+    "src"
+  ]
 }

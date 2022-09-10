@@ -1,4 +1,4 @@
-import { RequireAuth } from "components/AuthenticatedRoute";
+import { RequireAuth } from "@components/AuthenticatedRoute";
 import Layout from "layout/Layout";
 import { Fragment } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";

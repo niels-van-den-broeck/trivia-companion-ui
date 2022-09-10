@@ -8,7 +8,7 @@ import { useAuthentication } from "@context/AuthContext";
 
 import logo from "@assets/logo.svg";
 
-import Modal from "components/Modal";
+import Modal from "@components/Modal";
 
 import { FirebaseAuth } from "react-firebaseui";
 
