@@ -58,7 +58,7 @@ export default function Header() {
             />
           </button>
         )}
-        <Modal open={loginModalOpen} onClose={onLoginOrCancel}>
+        <Modal open={loginModalOpen} onClose={onLoginOrCancel} title="Login">
           <FirebaseAuth
             uiConfig={{
               signInOptions: [

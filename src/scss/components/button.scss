@@ -4,11 +4,14 @@ button {
   border: none;
   padding: 0.5rem;
   border-radius: 5px;
-  color: v.$color-primary;
-  background-color: v.$color-green;
+
+  color: v.$color-secondary;
+
+  background-color: v.$color-primary;
+  box-shadow: 0.1rem 0.1rem 0.1rem v.$color-green-dark;
 
   &:hover {
     cursor: pointer;
-    background-color: v.$color-green-light;
+    background-color: lighten(v.$color-primary, 5%);
   }
 }
