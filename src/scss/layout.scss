@@ -1,0 +1,37 @@
+@use "./variables.scss" as v;
+html,
+body,
+app,
+#root {
+  height: 100%;
+}
+
+body {
+  font-family: v.$font-family;
+  background-color: v.$color-green;
+  background-image: linear-gradient(v.$color-green, v.$color-green-dark);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+#root {
+  display: grid;
+  grid-template-rows: 5em 1fr;
+  grid-template-areas:
+    "header"
+    "main";
+
+  header {
+    grid-area: header;
+
+    color: v.$color-primary;
+  }
+
+  main {
+    grid-area: main;
+    // background: url("../assets/logo.svg") no-repeat 80% center;
+    // background-size: 30%;
+    padding: 2rem;
+    color: v.$color-secondary;
+  }
+}

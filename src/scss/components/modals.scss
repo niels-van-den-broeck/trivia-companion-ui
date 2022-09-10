@@ -1,0 +1,54 @@
+@use "../variables.scss" as v;
+
+body {
+  #modals {
+    height: 0;
+    width: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: opacity 0.2s ease-in;
+  }
+
+  &.modal-open {
+    position: relative;
+    #modals {
+      opacity: 1;
+      display: flex;
+      height: 100%;
+      width: 100%;
+
+      align-items: center;
+      justify-content: center;
+
+      background-color: rgba(0, 0, 0, 0.5);
+      position: absolute;
+      top: 0;
+      left: 0;
+
+      .modal {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        min-height: 50%;
+        border-radius: 5px;
+        background-color: v.$color-green-dark;
+        position: relative;
+
+        .close {
+          position: absolute;
+          height: 2rem;
+          width: 2rem;
+          top: -1rem;
+          left: calc(100% - 1.3rem);
+          background-color: v.$color-green;
+          border-radius: 50%;
+        }
+        // background-image: linear-gradient(
+        //   v.$color-green-dark 0 90%,
+        //   v.$color-green
+        // );
+      }
+    }
+  }
+}

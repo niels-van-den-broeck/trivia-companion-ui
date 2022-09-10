@@ -13,6 +13,8 @@ api.interceptors.request.use((config) => {
     if (!config.headers) config.headers = {};
     config.headers.authorization = token;
   }
+
+  return config;
 });
 
 export default api;

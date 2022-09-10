@@ -1,27 +1,26 @@
-import React from "react";
+import Layout from "layout/Layout";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
-import "./App.css";
 import { AuthProvider } from "./context/AuthContext";
 import ROUTES from "./modules";
-import Home from "./modules/home/Home";
 
 function renderRoute(route: { route: string; element: JSX.Element }) {
-  return <Route path={route.route} element={route.element} />;
+  return (
+    <Route
+      key={route.route}
+      path={route.route}
+      element={<Layout>{route.element}</Layout>}
+    />
+  );
 }
 
 function App() {
   return (
-    <div className="App">
-      <AuthProvider>
-        <BrowserRouter>
-          <Routes>
-            {ROUTES.map(renderRoute)}
-            <Route path="/" element={<Home />} />
-          </Routes>
-        </BrowserRouter>
-      </AuthProvider>
-    </div>
+    <AuthProvider>
+      <BrowserRouter>
+        <Routes>{ROUTES.map(renderRoute)}</Routes>
+      </BrowserRouter>
+    </AuthProvider>
   );
 }
 

@@ -1,0 +1,49 @@
+@use "variables.scss" as v;
+
+header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+
+  color: v.$color-primary;
+
+  h1 {
+    font-weight: bold;
+  }
+
+  a {
+    color: v.$color-primary;
+    padding: 0.5rem;
+    border-radius: 5px;
+    &:hover {
+      background-color: v.$color-green-light;
+      cursor: pointer;
+    }
+  }
+
+  nav {
+    ul {
+      display: flex;
+      flex-direction: row;
+      gap: 2rem;
+    }
+  }
+
+  img {
+    height: 50px;
+    width: 50px;
+  }
+
+  div {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    align-items: center;
+
+    .profile {
+      border-radius: 50%;
+    }
+  }
+}
