@@ -4,6 +4,7 @@ const routes = [
   {
     route: "/",
     element: <Home />,
+    requireAuth: false,
   },
 ];
 

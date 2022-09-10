@@ -1,15 +1,26 @@
+import { RequireAuth } from "components/AuthenticatedRoute";
 import Layout from "layout/Layout";
+import { Fragment } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import { AuthProvider } from "./context/AuthContext";
 import ROUTES from "./modules";
 
-function renderRoute(route: { route: string; element: JSX.Element }) {
+function renderRoute(route: {
+  route: string;
+  element: JSX.Element;
+  requireAuth: boolean;
+}) {
+  const Wrapper = route.requireAuth ? RequireAuth : Fragment;
   return (
     <Route
       key={route.route}
       path={route.route}
-      element={<Layout>{route.element}</Layout>}
+      element={
+        <Wrapper>
+          <Layout>{route.element}</Layout>
+        </Wrapper>
+      }
     />
   );
 }

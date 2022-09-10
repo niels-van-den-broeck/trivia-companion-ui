@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-import { getQuizList, QUIZ_API_TYPES } from "@api/quiz";
+import { getQuizList, QUIZ_API_TYPES, deleteQuiz } from "@api/quiz";
 
 export default function QuizList() {
   const [quizList, setQuizList] = useState<QUIZ_API_TYPES["getList"][]>([]);
@@ -16,7 +16,7 @@ export default function QuizList() {
     fetchQuizList();
   }, [fetchQuizList]);
 
-  async function deleteQuiz(id: string) {
+  async function removeQuiz(id: string) {
     await deleteQuiz(id);
     await fetchQuizList();
   }
@@ -29,7 +29,7 @@ export default function QuizList() {
         {quizList.map((quiz) => (
           <li key={quiz.id}>
             <Link to={`/quiz/${quiz.id}`}>{quiz.title}</Link>
-            <button type="button" onClick={() => deleteQuiz(quiz.id)}>
+            <button type="button" onClick={() => removeQuiz(quiz.id)}>
               delete
             </button>
           </li>
