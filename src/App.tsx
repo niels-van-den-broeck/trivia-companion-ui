@@ -12,6 +12,7 @@ function renderRoute(route: {
   requireAuth: boolean;
 }) {
   const Wrapper = route.requireAuth ? RequireAuth : Fragment;
+
   return (
     <Route
       key={route.route}
